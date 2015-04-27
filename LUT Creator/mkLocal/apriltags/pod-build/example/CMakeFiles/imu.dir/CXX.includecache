@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fogatron/SDP/mkLocal/apriltags/example/Serial.cpp
+fcntl.h
+-
+termios.h
+-
+stdlib.h
+-
+iostream
+-
+sstream
+-
+unistd.h
+-
+Serial.h
+/home/fogatron/SDP/mkLocal/apriltags/example/Serial.h
+
+/home/fogatron/SDP/mkLocal/apriltags/example/Serial.h
+string
+-
+
+/home/fogatron/SDP/mkLocal/apriltags/example/imu.cpp
+iostream
+-
+string
+-
+stdio.h
+-
+math.h
+-
+Serial.h
+/home/fogatron/SDP/mkLocal/apriltags/example/Serial.h
+

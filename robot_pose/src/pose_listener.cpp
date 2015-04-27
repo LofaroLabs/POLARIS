@@ -1,0 +1,78 @@
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+#include <string>
+#include <vector>
+
+//for ACH IPC
+#include <errno.h>
+#include <fcntl.h>
+#include <assert.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <ctype.h>
+#include <stdbool.h>
+#include <math.h>
+#include <inttypes.h>
+#include "ach.h"
+#include "channelslam.h"
+
+#include <iostream>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <sys/time.h>
+
+using namespace std;
+
+// for ACH IPC
+ach_channel_t chan_slam;      // Feed-Forward (Reference)
+
+void Callback(const std_msgs::String::ConstPtr& msg){
+	std::string s = msg->data.c_str();
+	std::string delimiter = "||";
+	size_t pos = 0;
+	int count = 0;
+	std::string token;
+	//vector<double> pose(3);
+	double x;
+	double y;
+	double theta;
+
+	/* Open IPC Ach Channel */
+	int r = 1;
+	r = ach_open(&chan_slam, "slam" , NULL);
+	cout << SLAM_NAME << endl;
+	assert( ACH_OK == r );
+
+	/* Create initial structures to read and write from for IPC channel */
+	struct controller_ref c_ref;
+	memset( &c_ref,   0, sizeof(c_ref));
+
+	while ((pos = s.find(delimiter)) != std::string::npos) {
+    		token = s.substr(0, pos);
+		//printf("%s\n",token.c_str());
+		if (count==0){
+			x=atof(token.c_str());
+		}
+		if (count==1){
+			y=atof(token.c_str());
+		}
+		if (count==2){
+			theta=atof(token.c_str());
+		}
+		count++;
+		s.erase(0, pos + delimiter.length());    		
+	}
+	c_ref.xSLAM = x;
+	c_ref.ySLAM = y;
+	c_ref.yawSLAM = theta;
+	ach_put( &chan_slam, &c_ref, sizeof(c_ref));
+	printf("x: %f y: %f theta: %f\n",x,y,theta);
+}
+int main(int argc, char **argv){
+	ros::init(argc, argv, "pose_listener");
+	ros::NodeHandle n;
+	ros::Subscriber sub = n.subscribe("robot_pose", 1000,Callback);
+	ros::spin();
+	return 0;
+}

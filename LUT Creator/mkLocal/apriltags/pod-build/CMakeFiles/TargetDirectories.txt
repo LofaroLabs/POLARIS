@@ -1,0 +1,4 @@
+/home/fogatron/SDP/mkLocal/apriltags/pod-build/CMakeFiles/apriltags.dir
+/home/fogatron/SDP/mkLocal/apriltags/pod-build/example/CMakeFiles/apriltags_demo.dir
+/home/fogatron/SDP/mkLocal/apriltags/pod-build/example/CMakeFiles/imu.dir
+/home/fogatron/SDP/mkLocal/apriltags/pod-build/CMakeFiles/tmp.dir

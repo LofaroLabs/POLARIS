@@ -1,0 +1,4 @@
+/home/student/SDP/mkSINGLE/apriltags/pod-build/CMakeFiles/apriltags.dir
+/home/student/SDP/mkSINGLE/apriltags/pod-build/example/CMakeFiles/apriltags_demo.dir
+/home/student/SDP/mkSINGLE/apriltags/pod-build/example/CMakeFiles/imu.dir
+/home/student/SDP/mkSINGLE/apriltags/pod-build/CMakeFiles/tmp.dir
