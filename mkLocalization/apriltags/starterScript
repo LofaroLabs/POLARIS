@@ -1,0 +1,32 @@
+#!/bin/bash
+# script to start locallization
+
+echo 'Making recognition channel... wait 5 sec <3'
+ach mk recognition
+sleep 5
+
+echo 'Starting APRILTAGS... wait 5 sec <3'
+./build/bin/apriltags_demo &
+
+
+cd example
+
+echo 'Starting LUTReader.py ... wait 5 sec <3'
+screen -S LUTReader -d -m python LUTReader.py
+sleep 5
+
+if ! screen -list | grep -q "LUTReader"; then
+	echo 'LUTReader started: FAIL'
+else
+	echo 'LUTReader started: SUCCESS <3'
+fi
+
+echo 'Starting localizer.py ... wait 5 sec <3'
+screen -S localizer -d -m python localizer.py
+sleep 5
+
+if ! screen -list | grep -q "localizer"; then
+	echo 'localizer started: FAIL'
+else
+	echo 'localizer started: SUCCESS <3'
+fi
