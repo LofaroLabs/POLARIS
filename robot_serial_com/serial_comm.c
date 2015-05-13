@@ -1,0 +1,137 @@
+/*
+ * serial_comm.c
+ *
+ *  Created on: May 11, 2015
+ *      Author: fogatron
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <termios.h>
+
+int uart0_filestream = -1;
+int choice=0;
+int cord_count=0;
+int x=0;
+int y=0;
+int z=0;
+int theta=0;
+unsigned char tx_buffer[20];
+unsigned char *p_tx_buffer;
+unsigned char rx_buffer[256];
+
+void transmit_bytes();
+void read_bytes();
+
+int main(){
+	uart0_filestream = open("dev/ttyUSB0", O_RDWR | O_NOCTTY | O_NDELAY);
+
+	if (uart0_filestream == -1){
+		printf("Error - Unable to open UART\n");
+	}
+
+	struct termios options;
+	tcgetattr(uart0_filestream, &options);
+	options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;
+	options.c_iflag = IGNPAR;
+	options.c_oflag = 0;
+	options.c_lflag = 0;
+	tcflush(uart0_filestream, TCIFLUSH);
+	tcsetattr(uart0_filestream, TCSANOW, &options);
+
+	printf("Welcome to POLARIS\n Please choose an option below:\n");
+
+	while(1){
+		printf(	"1. Get Map for Engineering Building 3rd floor\n"
+				"2. Get META data for Engineering Building 3rd floor\n"
+				"3. Get localization information");
+		scanf("%d", &choice);
+		if (choice==1){
+			p_tx_buffer = &tx_buffer[0];
+			*p_tx_buffer++ = 'm';
+			*p_tx_buffer++ = 'a';
+			*p_tx_buffer++ = 'p';
+			transmit_bytes();
+			read_bytes();
+		}
+		else if (choice==2){
+			p_tx_buffer = &tx_buffer[0];
+			*p_tx_buffer++ = 'm';
+			*p_tx_buffer++ = 'e';
+			*p_tx_buffer++ = 't';
+			*p_tx_buffer++ = 'a';
+			transmit_bytes();
+			read_bytes();
+		}
+		else if (choice==3){
+			p_tx_buffer = &tx_buffer[0];
+			*p_tx_buffer++ = 'l';
+			*p_tx_buffer++ = 'o';
+			*p_tx_buffer++ = 'c';
+			*p_tx_buffer++ = 'a';
+			*p_tx_buffer++ = 'l';
+			transmit_bytes();
+			while(1){
+				read_bytes(); //Infinite loop to keep reading location
+			}
+		}
+		else printf("Invalid Choice, please choose again");
+	}
+}
+
+void transmit_bytes(){
+	if (uart0_filestream !=-1){
+		int count = write(uart0_filestream, tx_buffer[0], (p_tx_buffer - &tx_buffer[0]));
+		if (count<0){
+			printf("UART TX error\n");
+		}
+	}
+}
+
+void read_bytes(){
+	if (uart0_filestream != -1){
+		int rx_length = read(uart0_filestream, (void*)rx_buffer, 255);
+		if(rx_length < 0){
+			//error occurred---no bytes to read
+		}
+		if (rx_length == 0){
+			//no data waiting
+		}
+		else {
+			//bytes received
+			rx_buffer[rx_length] = '\0';
+			printf("%i bytes read : %s\n", rx_length, rx_buffer);
+		}
+		if (choice==1){
+			FILE *fp;
+			fp=fopen("~/Documents/map.jpg","w+");
+			fp = write(rx_buffer, sizeof(rx_buffer[0]), sizeof(rx_buffer)/sizeof(rx_buffer[0]));
+			fclose(fp);
+		}
+		if (choice==2){
+			FILE *fp;
+			fp=fopen("~/Documents/meta.txt","w+");
+			fp = write(rx_buffer, sizeof(rx_buffer[0]), sizeof(rx_buffer)/sizeof(rx_buffer[0]));
+			fclose(fp);
+		}
+		if (choice==3){
+			if(cord_count==0){
+				x=rx_buffer;
+			}
+			if(cord_count==1){
+				y=rx_buffer;
+			}
+			if(cord_count==2){
+				z=rx_buffer;
+			}
+			if(cord_count==3){
+				theta=rx_buffer;
+			}
+			cord_count++;
+			if (cord_count==4){
+				cord_count=0;
+			}
+		}
+	}
+}
