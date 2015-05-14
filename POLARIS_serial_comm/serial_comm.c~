@@ -128,8 +128,8 @@ void read_bytes(){
 			&tx_buffer[0]="Request for Localization information recived/0";
 			transmit_bytes();
 			//IPC
-			int localizerOpen = ach_open(&chan_localizer, CHAN_LOCALIZER_NAME, NULL);
-			assert(ACH_OK == localizerOpen);
+			//int localizerOpen = ach_open(&chan_localizer, CHAN_LOCALIZER_NAME, NULL);
+			//assert(ACH_OK == localizerOpen);
 
 			/*Create initial structure to read from*/
 			struct localizer L_localizer;
@@ -141,17 +141,23 @@ void read_bytes(){
 			while(1){
 				// IPC
 				/*Get the current localization values*/
-				localizerOpen = ach_get(&chan_localizer, &L_localizer, sizeof(L_localizer), &fs, NULL, ACH_O_LAST);
-				if(ACH_OK != localizerOpen){
+				//localizerOpen = ach_get(&chan_localizer, &L_localizer, sizeof(L_localizer), &fs, NULL, ACH_O_LAST);
+				/*if(ACH_OK != localizerOpen){
 					assert(sizeof(L_localizer) == fs);
-				}
-				uint32_t valid = L_localizer.valid;
+				}*/
+				//uint32_t valid = L_localizer.valid;
+				/*
 				double x = L_localizer.x;
 				double y = L_localizer.y;
 				uint32_t z = L_localizer.z;
 				double THETA = L_localizer.THETA;
+				*/
+				double x=10.2;
+				double y=1.2;
+				uint32_t z = 0.1;
+				double THETA = 4.3;
 				int i;
-				for(i=0;i<4;i++){ //loop to send out x,y,z,THETA in order
+				for(i=0;i<4;i++){
 					if (i==0){
 						p_tx_buffer = &tx_buffer[0];
 						snprintf(p_tx_buffer,sizeof(tx_buffer),"%f",x);

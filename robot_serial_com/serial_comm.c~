@@ -111,19 +111,19 @@ void read_bytes(){
 			rx_buffer[rx_length] = '\0';
 			printf("%i bytes read : %s\n", rx_length, rx_buffer);
 		}
-		if (choice==1){ //take in the Map
+		if (choice==1){
 			FILE *fp;
 			fp=fopen("~/Documents/map.jpg","w+");
 			fp = write(rx_buffer, sizeof(rx_buffer[0]), sizeof(rx_buffer)/sizeof(rx_buffer[0]));
 			fclose(fp);
 		}
-		if (choice==2){ //take in the Meta data
+		if (choice==2){
 			FILE *fp;
 			fp=fopen("~/Documents/meta.txt","w+");
 			fp = write(rx_buffer, sizeof(rx_buffer[0]), sizeof(rx_buffer)/sizeof(rx_buffer[0]));
 			fclose(fp);
 		}
-		if (choice==3){ //take in the x,y,z,THETA
+		if (choice==3){
 			if(cord_count==0){
 				x=rx_buffer;
 			}
