@@ -1,5 +1,5 @@
 # POLARIS
-**Position Oriantation Locatization Augmented Reality (AR) Tag Indoor System**
+**Position Orientation Localization ARTag Recognition Indoor System**
 *******************************************************************************
 *******************************************************************************
 
