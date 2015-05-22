@@ -1,0 +1,241 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:special
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:power_circuit_odroid2-cache
+EELAYER 27 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date "24 apr 2015"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Text Label 3750 2250 0    60   ~ 0
+lm
+$Comp
+L R R1
+U 1 1 55381CE4
+P 5750 2450
+F 0 "R1" V 5830 2450 40  0000 C CNN
+F 1 "6.2k" V 5757 2451 40  0000 C CNN
+F 2 "~" V 5680 2450 30  0000 C CNN
+F 3 "~" H 5750 2450 30  0000 C CNN
+	1    5750 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIODE D1
+U 1 1 55381CF3
+P 4950 1900
+F 0 "D1" H 4950 2000 40  0000 C CNN
+F 1 "1N5825" H 4950 1800 40  0000 C CNN
+F 2 "~" H 4950 1900 60  0000 C CNN
+F 3 "~" H 4950 1900 60  0000 C CNN
+	1    4950 1900
+	0    1    1    0   
+$EndComp
+$Comp
+L INDUCTOR L1
+U 1 1 55381D02
+P 4650 2300
+F 0 "L1" V 4600 2300 40  0000 C CNN
+F 1 "15uH" V 4750 2300 40  0000 C CNN
+F 2 "~" H 4650 2300 60  0000 C CNN
+F 3 "~" H 4650 2300 60  0000 C CNN
+	1    4650 2300
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR01
+U 1 1 55381E50
+P 5650 4050
+F 0 "#PWR01" H 5650 4050 30  0001 C CNN
+F 1 "GND" H 5650 3980 30  0001 C CNN
+F 2 "" H 5650 4050 60  0000 C CNN
+F 3 "" H 5650 4050 60  0000 C CNN
+	1    5650 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L LM2679-3.3/NOPB U1
+U 1 1 55386732
+P 5600 1850
+F 0 "U1" H 5550 2100 40  0001 C CNN
+F 1 "LM2679-3.3/NOPB" H 5300 2050 40  0000 L CNN
+F 2 "TO-220" H 5600 1950 30  0000 C CIN
+F 3 "~" H 5600 1850 60  0000 C CNN
+	1    5600 1850
+	1    0    0    -1  
+$EndComp
+$Comp
+L C Cboost1
+U 1 1 55386AFD
+P 4950 2800
+F 0 "Cboost1" H 4950 2900 40  0000 L CNN
+F 1 "0.01uF" H 4956 2715 40  0000 L CNN
+F 2 "~" H 4988 2650 30  0000 C CNN
+F 3 "~" H 4950 2800 60  0000 C CNN
+	1    4950 2800
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5750 2200 5750 2100
+Wire Wire Line
+	4950 2600 4950 2100
+Connection ~ 4950 2300
+Wire Wire Line
+	4950 2300 5350 2300
+Wire Wire Line
+	5350 2300 5350 2100
+Wire Wire Line
+	4950 1700 4950 1400
+Wire Wire Line
+	4950 1400 6200 1400
+Connection ~ 4400 3450
+Wire Wire Line
+	5450 3450 5450 2100
+Connection ~ 5650 3850
+Wire Wire Line
+	4950 3000 5550 3000
+Wire Wire Line
+	5550 3000 5550 2100
+Wire Wire Line
+	6200 1400 6200 3800
+Wire Wire Line
+	6200 3800 5650 3800
+Connection ~ 5650 3800
+Wire Wire Line
+	5750 2700 5750 3000
+Wire Wire Line
+	5750 3000 5650 3000
+Connection ~ 5650 3000
+Wire Wire Line
+	2550 2300 4350 2300
+Wire Wire Line
+	3300 1900 4050 1900
+Wire Wire Line
+	4250 2300 4250 1250
+Wire Wire Line
+	4250 1250 6350 1250
+Wire Wire Line
+	6350 1250 6350 2200
+Wire Wire Line
+	6350 2200 5850 2200
+Wire Wire Line
+	5850 2200 5850 2100
+Connection ~ 4250 2300
+Wire Wire Line
+	4050 1900 4050 3200
+Wire Wire Line
+	4050 3200 5650 3200
+Connection ~ 5650 3200
+Connection ~ 3300 2300
+Text Notes 2400 2200 0    60   ~ 0
+Output
+$Comp
+L CAPAPOL C2
+U 1 1 553878B1
+P 3300 2100
+F 0 "C2" H 3350 2200 40  0000 L CNN
+F 1 "2200uF" H 3350 2000 40  0000 L CNN
+F 2 "~" H 3400 1950 30  0000 C CNN
+F 3 "~" H 3300 2100 300 0000 C CNN
+	1    3300 2100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5650 2100 5650 4050
+$Comp
+L VCC #PWR02
+U 1 1 553881E3
+P 3200 3450
+F 0 "#PWR02" H 3200 3550 30  0001 C CNN
+F 1 "VCC" H 3200 3550 30  0000 C CNN
+F 2 "" H 3200 3450 60  0000 C CNN
+F 3 "" H 3200 3450 60  0000 C CNN
+	1    3200 3450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L PWR_FLAG #FLG03
+U 1 1 553881F2
+P 3250 3400
+F 0 "#FLG03" H 3250 3495 30  0001 C CNN
+F 1 "PWR_FLAG" H 3250 3580 30  0000 C CNN
+F 2 "" H 3250 3400 60  0000 C CNN
+F 3 "" H 3250 3400 60  0000 C CNN
+	1    3250 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 3400 3250 3450
+Connection ~ 3250 3450
+$Comp
+L PWR_FLAG #FLG04
+U 1 1 55388229
+P 5850 4000
+F 0 "#FLG04" H 5850 4095 30  0001 C CNN
+F 1 "PWR_FLAG" H 5850 4180 30  0000 C CNN
+F 2 "" H 5850 4000 60  0000 C CNN
+F 3 "" H 5850 4000 60  0000 C CNN
+	1    5850 4000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5850 4000 5650 4000
+Wire Wire Line
+	5650 4000 5650 3950
+Connection ~ 5650 3950
+Wire Wire Line
+	3200 3450 5450 3450
+Connection ~ 4400 3850
+$Comp
+L CAPAPOL C1
+U 1 1 553878CF
+P 4400 3650
+F 0 "C1" H 4450 3750 40  0000 L CNN
+F 1 "220uF" H 4450 3550 40  0000 L CNN
+F 2 "~" H 4500 3500 30  0000 C CNN
+F 3 "~" H 4400 3650 300 0000 C CNN
+	1    4400 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5650 3850 4400 3850
+Text Notes 2350 2500 0    60   ~ 12
+5V / 4A
+$EndSCHEMATC
